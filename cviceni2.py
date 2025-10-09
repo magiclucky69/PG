@@ -1,5 +1,20 @@
 def vrat_treti(seznam):
-        return seznam[2]
+        if (seznam) >= 3:
+            return seznam[2]
+        else:
+               return None
+
+def prumer(cisla):
+       #vrati pocet hodnot v promenne cisla vydeleny jejich poctem
+       return sum(cisla) / len(cisla)
+
+def naformatuj_text(student):
+       jmeno = student["jmeno"]
+       prijimeni = student["prijimeni"]
+       vek = student["vek"]
+       prumer_znamek = round(prumer(student["znamky"]),2)
+       return f"Student: {jmeno} {prijimeni}, Vek: {vek}, Prumer znamek: {prumer_znamek}"
+
 
 if __name__ == "__main__":
         # vytvorime novy seznam (list)
@@ -12,6 +27,17 @@ if __name__ == "__main__":
         seznam.sort()
         seznam.reverse()
         
-        seznam2 = [1,2]
-        treti_prvek = vrat_treti(seznam2)
-        print(treti_prvek)
+        seznam2 = [1,2,3]
+        #vrat_treti(seznam2)
+        print(prumer(seznam))
+
+
+student = {
+       "jmeno": "Jan",
+       "prijimeni": "Novak",
+       "vek": 22,
+       "znamky": [1,2,1,3,1,2,1]
+}
+student["vek"] += 1
+#print (student["znamky"][4])
+print (naformatuj_text(student))
