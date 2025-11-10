@@ -21,10 +21,10 @@ def is_jpeg(file_name):
     #Funkce zkusí přečíst ze souboru hlavičku obrázku jpeg,
     #tu srovná s definovanou hlavičkou v proměnné jpeg_header
     
-    # načti hlavičku souboru
+    # načte hlavičku souboru
     header = read_header(file_name, len(jpeg_header))
 
-    # vyhodnoť zda je soubor jpeg
+    # vyhodnotí zda je soubor jpeg
     return header == jpeg_header
 
 
@@ -34,7 +34,7 @@ def is_gif(file_name):
     #a tu srovná s definovanými hlavičkami v proměnných gif_header1 a gif_header2
     
     header = read_header(file_name, len(gif_header1))  # obě GIF hlavičky mají 6 bytů
-    # vyhodnoť zda je soubor gif
+    # vyhodnotí zda je soubor gif
     return header == gif_header1 or header == gif_header2
 
 
@@ -44,13 +44,13 @@ def is_png(file_name):
     #a tu srovná s definovanou hlavičkou v proměnné png_header
     
     header = read_header(file_name, len(png_header))  # PNG signatura má 8 bytů
-    # vyhodnoť zda je soubor png
+    # vyhodnotí zda je soubor png
     return header == png_header
 
 
 def print_file_type(file_name):
     
-    #Funkce vypíše typ souboru - tuto funkci není třeba upravovat
+    #Funkce vypíše typ souboru
     
     if is_jpeg(file_name):
         print(f'Soubor {file_name} je typu jpeg')
@@ -63,7 +63,7 @@ def print_file_type(file_name):
 
 
 if __name__ == '__main__':
-    # přidej try-except blok, odchyť obecnou vyjímku Exception a vypiš ji
+    # přidá try-except blok, odchytí obecnou vyjímku Exception a vypíše jí
     try:
         file_name = sys.argv[1]
         print_file_type(file_name)
