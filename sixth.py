@@ -12,18 +12,18 @@ def download_url_and_get_all_hrefs(url):
     
     hrefs = []
 
-    # stáhni stránku
+    # stáhne stránku
     response = requests.get(url)
 
-    # zkontroluj návratový kód
+    # zkontroluje návratový kód
     if response.status_code != 200:
         raise Exception(f"Chyba pri stahovani URL {url}, status code: {response.status_code}")
 
-    # dekóduj obsah stránky (response.content jsou byty)
+    # dekóduje obsah stránky (response.content jsou byty)
     content = response.content.decode(response.encoding or "utf-8", errors="ignore")
 
-    # najdi všechny odkazy ve tvaru <a ... href="něco" ...>
-    # skupina v závorkách () vrací jen samotné URL v href=""
+    # najde všechny odkazy ve tvaru <a ... href="něco" ...>
+    # skupinu v závorkách () vrací jen samotné URL v href=""
     hrefs = re.findall(r'<a\s+[^>]*href="([^"]+)"', content)
 
     return hrefs
