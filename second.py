@@ -1,29 +1,40 @@
-def cislo_na_text(cislo):
-    jednotky = ["nula", "jedna", "dva", "tři", "čtyři", "pět",
-                "šest", "sedm", "osm", "devět"]
-    teens = ["deset", "jedenáct", "dvanáct", "třináct", "čtrnáct",
-             "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"]
-    desitky = ["", "", "dvacet", "třicet", "čtyřicet", "padesát",
-               "šedesát", "sedmdesát", "osmdesát", "devadesát"]
+def cislo_text(cislo):
+    # Funkce zkonvertuje číslo do jeho textové reprezentace
+    # Například: 25 -> "dvacet pět", omezeno na čísla od 0 do 100
 
-    if cislo < 0 or cislo > 100:
-        return "Mimo rozsah (0–100)"
-    if cislo < 10:
-        return jednotky[cislo]
-    if 10 <= cislo < 20:
-        return teens[cislo - 10]
+    # Seznam pro jednotky (0-9)
+    jednotky = ["nula", "jedna", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět"]
+
+    # Seznam pro desítky (20-90)
+    desitky = ["", "", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"]
+
+    # Speciální čísla 10-19
+    specialni = ["deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"]
+
+    # Speciální případ pro číslo 100
     if cislo == 100:
         return "sto"
 
-    d = cislo // 10
-    j = cislo % 10
+    # Pokud číslo je menší než 10 (jednotky)
+    if cislo < 10:
+        return jednotky[cislo]
 
-    if j == 0:
-        return desitky[d]
+    # Pokud číslo je mezi 10 a 19 (speciální čísla)
+    if cislo < 20:
+        return specialni[cislo - 10]
+
+    # Pokud číslo je mezi 20 a 99 (desítky + jednotky)
+    desitky_cislo = cislo // 10
+    jednotky_cislo = cislo % 10
+    if jednotky_cislo == 0:
+        return desitky[desitky_cislo]
     else:
-        return desitky[d] + " " + jednotky[j]
+        return f"{desitky[desitky_cislo]} {jednotky[jednotky_cislo]}"
 
-
-# --- test ---
-for n in [0, 5, 10, 13, 25, 40, 58, 73, 99, 100]:
-    print(f"{n} → {cislo_na_text(n)}")
+# Příklad použití funkce
+if __name__ == "__main__":
+    cislo = int(input("Zadejte číslo (0-100): "))
+    if 0 <= cislo <= 100:
+        print(cislo_text(cislo))
+    else:
+        print("Zadejte číslo mezi 0 a 100.")
